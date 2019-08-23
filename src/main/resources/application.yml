@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  servlet:
+      session:
+        timeout: 30m #30\u5206\u949F\uFF0C\u6D4B\u8BD5\u7684\u8BDD\u65F6\u95F4\u4E0D\u80FD\u592A\u77ED\uFF0C\u5426\u5219\u4E0D\u51C6\u3002m\u662F\u5206\u949F\u5355\u4F4D\uFF0Cs\u662F\u79D2\u7684\u5355\u4F4D\uFF0Ch\u662F\u5C0F\u65F6\u7684\u5355\u4F4D\uFF0C\u4E0D\u5199\u5355\u4F4D\u7684\u8BDD\u9ED8\u8BA4\u662F\u6BEB\u79D2
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/comm?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: ale
+    password: a123456
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: true
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+#mybatis
+mybatis:
+  type-aliases-package: com.ale.shirojwtdemo.entity
+  mapper-locations: classpath:/mybatis/mapper/*
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+logging:
+  level:
+    root: info
+    com.ale.shirojwtdemo.dao: debug
+  file: logs/shiro-jwt-demo.log
+  maxsize: 10MB
+
+#jwt
+token:
+  expire:
+    seconds: 86400
